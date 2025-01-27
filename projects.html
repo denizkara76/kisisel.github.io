@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeler - Kreatif Tasarımcı</title>
+    <meta name="description" content="Kreatif Tasarımcı'nın portföyü ve tamamlanan projeler">
+    <meta name="keywords" content="web tasarım projeleri, UI/UX tasarım, web geliştirme, kreatif tasarımcı">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+
+    <style>
+        .projects-hero {
+            position: relative;
+            padding: var(--spacing-2xl) 0;
+            background-color: var(--bg-color);
+            text-align: center;
+        }
+
+        .projects-hero__content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .text-content .subtitle {
+            color: var(--primary-color);
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-medium);
+            margin-bottom: var(--spacing-sm);
+            display: block;
+        }
+
+        .text-content .title {
+            font-size: var(--font-size-4xl);
+            color: var(--text-color);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.2;
+        }
+
+        .text-content .description {
+            color: var(--text-color-muted);
+            font-size: var(--font-size-lg);
+            line-height: 1.6;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            flex-wrap: wrap;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .filter-btn {
+            padding: var(--spacing-sm) var(--spacing-md);
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color-muted);
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            border-color: var(--primary-color);
+        }
+
+        .projects {
+            padding: var(--spacing-2xl) 0;
+            background-color: var(--bg-color-alt);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-links {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        .project-links a {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover .project-links a {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .project-links a:hover {
+            background-color: var(--text-color);
+        }
+
+        .project-content {
+            padding: var(--spacing-lg);
+        }
+
+        .project-title {
+            font-size: var(--font-size-xl);
+            color: var(--text-color);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .project-description {
+            color: var(--text-color-muted);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.6;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: var(--spacing-md);
+        }
+
+        .technologies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-xs);
+        }
+
+        .tech {
+            padding: var(--spacing-xs) var(--spacing-sm);
+            background-color: var(--bg-color);
+            color: var(--text-color-muted);
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-sm);
+        }
+
+        .stats {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+        }
+
+        .stat {
+            color: var(--text-color-muted);
+            font-size: var(--font-size-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .stat i {
+            color: var(--primary-color);
+        }
+
+        .cta-section {
+            padding: var(--spacing-2xl) 0;
+            background-color: var(--bg-color);
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: var(--font-size-3xl);
+            color: var(--text-color);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .cta-description {
+            color: var(--text-color-muted);
+            margin-bottom: var(--spacing-lg);
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-md) var(--spacing-lg);
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            border-radius: var(--radius-full);
+            font-weight: var(--font-weight-medium);
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: var(--text-color);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .filter-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-meta {
+                flex-direction: column;
+            }
+
+            .technologies {
+                margin-bottom: var(--spacing-sm);
+            }
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    <!-- Header Component -->
+    <site-header></site-header>
+
+    <main>
+        <!-- Projects Hero Section -->
+        <section class="projects-hero">
+            <div class="container">
+                <div class="projects-hero__content">
+                    <div class="text-content" data-aos="fade-up">
+                        <span class="subtitle">Portfolio</span>
+                        <h1 class="title">Seçkin Projelerim</h1>
+                        <p class="description">Her bir proje, modern tasarım prensipleri ve en son teknolojiler kullanılarak özenle hazırlanmıştır. Detaylı bilgi için projelere tıklayabilirsiniz.</p>
+                    </div>
+                    <div class="filter-buttons" data-aos="fade-up" data-aos-delay="200">
+                        <button class="filter-btn active" data-filter="all">Tümü</button>
+                        <button class="filter-btn" data-filter="web">Web Tasarım</button>
+                        <button class="filter-btn" data-filter="ui">UI/UX</button>
+                        <button class="filter-btn" data-filter="app">Mobil App</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Grid -->
+        <section class="projects">
+            <div class="container">
+                <div class="projects-grid">
+                    <!-- Project 1 -->
+                    <article class="project-card" data-aos="fade-up" data-category="web">
+                        <div class="project-image">
+                            <img src="assets/img/project-1.jpg" alt="E-ticaret Web Sitesi">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="#" class="preview-link" title="Canlı Önizleme">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <a href="#" class="details-link" title="Proje Detayları">
+                                        <i class="fas fa-info-circle"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Modern E-ticaret Platformu</h3>
+                            <p class="project-description">Kullanıcı dostu arayüz ve gelişmiş filtreleme özellikleriyle öne çıkan e-ticaret projesi. React ve Node.js ile geliştirildi.</p>
+                            <div class="project-meta">
+                                <div class="technologies">
+                                    <span class="tech">React</span>
+                                    <span class="tech">Node.js</span>
+                                    <span class="tech">MongoDB</span>
+                                </div>
+                                <div class="stats">
+                                    <span class="stat">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        500+ Ürün
+                                    </span>
+                                    <span class="stat">
+                                        <i class="fas fa-users"></i>
+                                        10K+ Kullanıcı
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 2 -->
+                    <article class="project-card" data-aos="fade-up" data-aos-delay="100" data-category="ui">
+                        <div class="project-image">
+                            <img src="assets/img/project-2.jpg" alt="Finans App UI">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="#" class="preview-link" title="Canlı Önizleme">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <a href="#" class="details-link" title="Proje Detayları">
+                                        <i class="fas fa-info-circle"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Finans App UI Tasarımı</h3>
+                            <p class="project-description">Modern ve kullanıcı dostu finans uygulaması arayüz tasarımı. Figma ile tasarlandı ve React Native ile geliştirildi.</p>
+                            <div class="project-meta">
+                                <div class="technologies">
+                                    <span class="tech">Figma</span>
+                                    <span class="tech">React Native</span>
+                                    <span class="tech">UI/UX</span>
+                                </div>
+                                <div class="stats">
+                                    <span class="stat">
+                                        <i class="fas fa-star"></i>
+                                        4.8/5 Puan
+                                    </span>
+                                    <span class="stat">
+                                        <i class="fas fa-download"></i>
+                                        50K+ İndirme
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 3 -->
+                    <article class="project-card" data-aos="fade-up" data-aos-delay="200" data-category="app">
+                        <div class="project-image">
+                            <img src="assets/img/project-3.jpg" alt="Fitness App">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="#" class="preview-link" title="Canlı Önizleme">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <a href="#" class="details-link" title="Proje Detayları">
+                                        <i class="fas fa-info-circle"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Fitness Takip Uygulaması</h3>
+                            <p class="project-description">Kişiselleştirilmiş antrenman programları ve beslenme takibi sunan mobil uygulama. Flutter ile geliştirildi.</p>
+                            <div class="project-meta">
+                                <div class="technologies">
+                                    <span class="tech">Flutter</span>
+                                    <span class="tech">Firebase</span>
+                                    <span class="tech">ML Kit</span>
+                                </div>
+                                <div class="stats">
+                                    <span class="stat">
+                                        <i class="fas fa-users"></i>
+                                        20K+ Aktif Kullanıcı
+                                    </span>
+                                    <span class="stat">
+                                        <i class="fas fa-chart-line"></i>
+                                        %95 Memnuniyet
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 4 -->
+                    <article class="project-card" data-aos="fade-up" data-aos-delay="300" data-category="web">
+                        <div class="project-image">
+                            <img src="assets/img/project-4.jpg" alt="Blog Platformu">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="#" class="preview-link" title="Canlı Önizleme">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <a href="#" class="details-link" title="Proje Detayları">
+                                        <i class="fas fa-info-circle"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Modern Blog Platformu</h3>
+                            <p class="project-description">Next.js ve Tailwind CSS ile geliştirilen, SEO dostu ve hızlı blog platformu. Markdown desteği ve özel admin paneli içerir.</p>
+                            <div class="project-meta">
+                                <div class="technologies">
+                                    <span class="tech">Next.js</span>
+                                    <span class="tech">Tailwind</span>
+                                    <span class="tech">MDX</span>
+                                </div>
+                                <div class="stats">
+                                    <span class="stat">
+                                        <i class="fas fa-eye"></i>
+                                        100K+ Görüntülenme
+                                    </span>
+                                    <span class="stat">
+                                        <i class="fas fa-pen"></i>
+                                        500+ Makale
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="cta-section" data-aos="fade-up">
+            <div class="container">
+                <div class="cta-content">
+                    <h2 class="cta-title">Projeniz için Hazırım!</h2>
+                    <p class="cta-description">Hayalinizdeki projeyi birlikte gerçekleştirelim. Modern teknolojiler ve yaratıcı çözümlerle markanızı öne çıkaralım.</p>
+                    <a href="contact.html" class="cta-button">
+                        Hemen İletişime Geçin
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html">
+                    <img src="assets/img/logo.png" alt="Kreatif Tasarımcı Logo">
+                    </a>
+                    <p>Kreatif Tasarımcı</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-nav">
+                        <h4>Menü</h4>
+                        <a href="index.html">Ana Sayfa</a>
+                        <a href="about.html">Hakkımda</a>
+                        <a href="projects.html">Projeler</a>
+                        <a href="contact.html">İletişim</a>
+                    </div>
+                    <div class="footer-social">
+                        <h4>Sosyal Medya</h4>
+                        <a href="#" target="_blank">Instagram</a>
+                        <a href="#" target="_blank">Twitter</a>
+                        <a href="#" target="_blank">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Kreatif Tasarımcı. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/components/header.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100,
+            easing: 'ease-in-out'
+        });
+
+        // Proje filtreleme işlevselliği
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Aktif buton sınıfını güncelle
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    // Projeleri filtrele
+                    const filterValue = button.getAttribute('data-filter');
+                    
+                    projectCards.forEach(card => {
+                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, 100);
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(20px)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

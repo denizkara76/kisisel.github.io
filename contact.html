@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İletişim - Kreatif Tasarımcı</title>
+    
+    <!-- Meta Etiketleri -->
+    <meta name="description" content="Kreatif Tasarımcı iletişim sayfası aracılığı ile soru ve görüşlerinizi bizimle paylaşabilirsiniz.">
+    <meta name="keywords" content="Kreatif Tasarımcı">
+    <meta property="og:title" content="İletişim">
+    <meta property="og:description" content="Kreatif Tasarımcı iletişim sayfası aracılığı ile soru ve görüşlerinizi bizimle paylaşabilirsiniz.">
+    <meta property="og:image" content="assets/img/logo.jpeg">
+    <meta property="og:url" content="https://kreatifsayfam.com/iletisim.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/img/logo.svg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/init.min-6.css">
+    
+    <!-- reCAPTCHA -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <style>
+        .contact-section {
+            padding: 20px 0;
+            min-height: calc(100vh - 200px);
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .contact-header img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-bottom: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            padding: 3px;
+        }
+
+        .contact-header h2 {
+            font-size: 1.3rem;
+            margin-bottom: 4px;
+        }
+
+        .contact-header p {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        .form-group {
+            margin-bottom: 8px;
+        }
+
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 2px;
+            display: block;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.85rem;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            padding: 6px 8px;
+            color: #fff;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+        }
+
+        .form-select {
+            padding: 6px 8px;
+            font-size: 0.85rem;
+        }
+
+        .upload-label {
+            padding: 6px 8px;
+            font-size: 0.85rem;
+            border-radius: 6px;
+        }
+
+        .kvkk-check {
+            margin: 10px 0;
+            font-size: 0.8rem;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #2196F3, #00BCD4);
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            color: #fff;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+        }
+
+        .g-recaptcha {
+            margin: 8px 0;
+            transform: scale(0.85);
+            transform-origin: left center;
+        }
+
+        small.text-muted {
+            font-size: 0.65rem;
+            opacity: 0.7;
+            margin-top: 1px;
+            display: block;
+        }
+
+        textarea.form-control {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        @media (max-width: 768px) {
+            .contact-container {
+                padding: 15px;
+                margin: 10px;
+                max-width: 100%;
+            }
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: var(--bg-color-alt);
+            padding: var(--spacing-xl) 0 var(--spacing-md);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .footer-brand img {
+            height: 40px;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .footer-brand p {
+            color: var(--text-color-muted);
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-xl);
+        }
+
+        .footer-nav,
+        .footer-social {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+
+        .footer-nav h4,
+        .footer-social h4 {
+            margin-bottom: var(--spacing-md);
+            color: var(--text-color);
+        }
+
+        .footer-nav a,
+        .footer-social a {
+            color: var(--text-color-muted);
+            text-decoration: none;
+            transition: var(--transition-base);
+        }
+
+        .footer-nav a:hover,
+        .footer-social a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-color-muted);
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="dark-theme rethink scrollable touchable">
+    <!-- Header Component -->
+    <site-header></site-header>
+
+    <main>
+        <section class="contact-section">
+            <div class="contact-container">
+                <div class="contact-header">
+                    <img src="assets/img/logo.jpeg" alt="Profile Image">
+                    <h2>Sizin için buradayız!</h2>
+                    <p>Aşağıya bilgilerinizi girin, size en kısa sürede geri döneceğiz.</p>
+                </div>
+
+                <form method="post" onsubmit="return contact(this);" id="contactForm">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Adınız Soyadınız <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="name" id="name" placeholder="Adınızı ve soyadınızı giriniz" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone" class="form-label">İletişim Numaranız <span class="text-danger">*</span></label>
+                        <input type="tel" class="form-control" name="phone" id="phone" placeholder="(5XX) XXX XX XX" maxlength="15" onkeyup="applyPhoneMask(this)" required>
+                        <small class="text-muted">Gerektiği durumda size ulaşmak için önemli</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="form-label">E-Posta Adresiniz</label>
+                        <input type="email" name="email" pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" class="form-control" id="email" placeholder="ornek@email.com">
+                        <small class="text-muted">Zorunlu değil ama olsa iyi olur</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="service" class="form-label">Ne için ulaşmak istiyorsunuz? <span class="text-danger">*</span></label>
+                        <select name="subject" class="form-select" id="service" required>
+                            <option value="">Seçiniz</option>
+                            <option value="Reklam / İş birliği">Reklam / İş birliği</option>
+                            <option value="Tasarım Hizmetleri">Tasarım Hizmetleri</option>
+                            <option value="Web Tasarımı & Mobil Uygulama">Web Tasarımı & Mobil Uygulama</option>
+                            <option value="Diğer Konular">Diğer Konular</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message" class="form-label">Mesajınız <span class="text-danger">*</span></label>
+                        <textarea class="form-control" name="message" id="message" rows="4" placeholder="Mesajınızı buraya yazabilirsiniz..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="file-upload" class="upload-label">
+                            <img src="../assets/img/upload.svg" width="24" height="24" alt="">
+                            <span>Görsel/Dosya Seç</span>
+                        </label>
+                        <input type="file" name="file" accept="image/*,application/pdf" class="form-control" hidden id="file-upload">
+                    </div>
+                    
+                    <div class="kvkk-check">
+                        <input type="checkbox" required class="form-check-input" id="kvkk">
+                        <label class="form-check-label" for="kvkk" data-bs-toggle="modal" data-bs-target="#kvkkModal">
+                            Kişisel verilerimin işlenmesine yönelik aydınlatma metnini okudum ve anladım.
+                        </label>
+                    </div>
+
+                    <div class="g-recaptcha" data-sitekey="6LcvhJMqAAAAACZLYAcBMFoWRd-GFuBvK1aitOhi" data-callback="enableSubmit"></div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn" disabled>GÖNDER</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html">
+                        <img src="../assets/img/logo.png" alt="Kreatif Tasarımcı Logo">
+                    </a>
+                    <p>Kreatif Tasarımcı</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-nav">
+                        <h4>Menü</h4>
+                        <a href="index.html">Ana Sayfa</a>
+                        <a href="about.html">Hakkımda</a>
+                        <a href="projects.html">Projeler</a>
+                        <a href="contact.html">İletişim</a>
+                    </div>
+                    <div class="footer-social">
+                        <h4>Sosyal Medya</h4>
+                        <a href="https://www.instagram.com/KreatifTasarimci" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+                        <a href="https://twitter.com/KreatifTasarim" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+                        <a href="https://www.linkedin.com/company/kreatif-tasarimci" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Kreatif Tasarımcı. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- KVKK Modal -->
+    <div class="modal" id="kvkkModal" tabindex="-1" aria-labelledby="kvkkModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-white">
+                <div class="modal-header">
+                    <img src="../assets/img/logo.jpeg" alt="Profile Image" width="70" height="70">
+                    <div>
+                        <h5 class="modal-title" id="contactModalLabel">KVKK Aydınlatma Metni</h5>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div style="max-height: 60vh;overflow: auto;padding: 15px;border-radius: 10px;">
+                        <p>İşbu bilgilendirme ve aydınlatma metni Kreatif Tasarımcı, 24/3/2016 tarihinde kabul edilen 6698 sayılı Kişisel Verilerin Korunması Kanunu ve ilgili sair mevzuat kapsamında, kişisel verilerin hukuka uygun olarak toplanması, elde edilmesi, saklanması, paylaşılması ve gizliliğinin koruması sırasında Veri sahiplerinin bilgilendirilmesi ve aydınlatılması amacıyla hazırlanmıştır.</p>
+                        <!-- ... Rest of the KVKK content ... -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/components/header.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        function applyPhoneMask(input) {
+            let value = input.value.replace(/\D/g, "");
+            if (value.length === 0) {
+                input.value = "";
+                return;
+            }
+            if (value.length > 10) value = value.slice(0, 10);
+            let formattedNumber = "";
+            if (value.length > 0) formattedNumber += "(" + value.slice(0, 3) + ")";
+            if (value.length > 3) formattedNumber += " " + value.slice(3, 6);
+            if (value.length > 6) formattedNumber += " " + value.slice(6, 8);
+            if (value.length > 8) formattedNumber += " " + value.slice(8, 10);
+            input.value = formattedNumber;
+        }
+
+        // Form validation - only check checkbox
+        function toggleSubmitButton() {
+            const submitBtn = document.getElementById('submitBtn');
+            const kvkk = document.getElementById('kvkk');
+            
+            submitBtn.disabled = !kvkk.checked;
+            submitBtn.style.opacity = kvkk.checked ? "1" : "0.5";
+        }
+
+        // Add event listener to checkbox
+        document.getElementById('kvkk').addEventListener('change', toggleSubmitButton);
+
+        // Initial check
+        toggleSubmitButton();
+    </script>
+
+    <!-- Add Font Awesome for social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</body>
+</html> 

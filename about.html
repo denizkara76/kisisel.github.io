@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hakkımda - Kreatif Tasarımcı | Deniz Firdevs</title>
+    
+    <!-- SEO Meta Etiketleri -->
+    <meta name="description" content="Kreatif web tasarım ve geliştirme uzmanı. Modern ve kullanıcı dostu web siteleri tasarlıyorum.">
+    <meta name="keywords" content="web tasarım, web geliştirme, UI/UX tasarım, kreatif tasarımcı, responsive tasarım">
+    <meta name="author" content="Deniz Firdevs">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Kreatif Tasarımcı | Deniz Firdevs">
+    <meta property="og:description" content="Modern ve kullanıcı dostu web siteleri tasarlıyorum">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://denizkara.com/about">
+    <meta property="og:image" content="assets/img/og-image.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+
+    <style>
+        .about-hero {
+            position: relative;
+            min-height: 100vh;
+            background-color: var(--bg-color);
+            padding: var(--spacing-4xl) 0;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: var(--spacing-4xl);
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-text {
+            max-width: 600px;
+        }
+
+        .hero-subtitle {
+            color: var(--primary-color);
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-medium);
+            margin-bottom: var(--spacing-lg);
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(var(--primary-color-rgb), 0.1);
+            border-radius: var(--radius-full);
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--text-color);
+            margin-bottom: var(--spacing-xl);
+            line-height: 1.1;
+            font-weight: var(--font-weight-bold);
+        }
+
+        .hero-description {
+            color: var(--text-color-muted);
+            font-size: var(--font-size-lg);
+            line-height: 1.8;
+            margin-bottom: var(--spacing-2xl);
+            max-width: 540px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: var(--spacing-2xl);
+            margin-top: var(--spacing-2xl);
+        }
+
+        .stat-item {
+            position: relative;
+        }
+
+        .stat-item::after {
+            content: '';
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 40px;
+            background: var(--border-color);
+        }
+
+        .stat-item:last-child::after {
+            display: none;
+        }
+
+        .stat-number {
+            font-size: var(--font-size-3xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-color);
+            margin-bottom: var(--spacing-xs);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-color-muted);
+            font-size: var(--font-size-base);
+        }
+
+        .hero-image-container {
+            position: relative;
+            height: 600px;
+            border-radius: var(--radius-2xl);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--card-bg);
+            border: none;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            width: 80%;
+            height: 80%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: logoFloat 6s ease-in-out infinite;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+        }
+
+        @keyframes logoFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .image-overlay {
+            display: none;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-lg);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: var(--spacing-md);
+            background-color: var(--card-bg);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-item .number {
+            display: block;
+            font-size: var(--font-size-3xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .stat-item .label {
+            color: var(--text-color-muted);
+            font-size: var(--font-size-sm);
+        }
+
+        .image-wrapper {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: auto;
+            border-radius: var(--radius-lg);
+            transition: transform 0.3s ease;
+        }
+
+        .image-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
+        .experience-badge {
+            position: absolute;
+            bottom: var(--spacing-md);
+            right: var(--spacing-md);
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-full);
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .experience-badge .years {
+            display: block;
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+        }
+
+        .experience-badge .text {
+            font-size: var(--font-size-sm);
+        }
+
+        .skills {
+            padding: var(--spacing-2xl) 0;
+            background-color: var(--bg-color-alt);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .section-title {
+            font-size: var(--font-size-3xl);
+            color: var(--text-color);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .section-subtitle {
+            color: var(--text-color-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-lg);
+        }
+
+        .skill-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-icon {
+            font-size: var(--font-size-3xl);
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .skill-progress {
+            margin-top: var(--spacing-md);
+        }
+
+        .progress-item {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .progress-item .label {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-color);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .progress-bar {
+            height: 6px;
+            background-color: var(--border-color);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+        }
+
+        .progress-bar .progress {
+            height: 100%;
+            background-color: var(--primary-color);
+            border-radius: var(--radius-full);
+            transition: width 1s ease;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: var(--spacing-xl) auto;
+            padding: 0 var(--spacing-lg);
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background-color: var(--border-color);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            width: 16px;
+            height: 16px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        .timeline-content {
+            position: relative;
+            width: calc(50% - var(--spacing-xl));
+            padding: var(--spacing-lg);
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: auto;
+        }
+
+        .timeline-header {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .timeline-header .date {
+            color: var(--primary-color);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+        }
+
+        .timeline-header .title {
+            font-size: var(--font-size-xl);
+            color: var(--text-color);
+            margin: var(--spacing-xs) 0;
+        }
+
+        .timeline-header .company {
+            color: var(--text-color-muted);
+            font-size: var(--font-size-sm);
+        }
+
+        .timeline-content .description {
+            color: var(--text-color-muted);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.6;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-xs);
+        }
+
+        .tag {
+            padding: var(--spacing-xs) var(--spacing-sm);
+            background-color: var(--bg-color);
+            color: var(--text-color-muted);
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-sm);
+        }
+
+        @media (max-width: 1200px) {
+            .hero-content {
+                grid-template-columns: 1fr 1fr;
+                gap: var(--spacing-2xl);
+            }
+
+            .hero-image-container {
+                height: 500px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-hero {
+                padding: var(--spacing-2xl) 0;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-2xl);
+            }
+
+            .hero-text {
+                text-align: center;
+                margin: 0 auto;
+            }
+
+            .hero-description {
+                margin: 0 auto var(--spacing-2xl);
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .hero-image-container {
+                height: 400px;
+                margin: 0 auto;
+                max-width: 500px;
+            }
+
+            .hero-image-wrapper {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    <!-- Header Component -->
+    <site-header></site-header>
+
+    <main>
+        <!-- About Hero Section -->
+        <section class="about-hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text" data-aos="fade-right">
+                        <span class="hero-subtitle">Merhaba, Ben</span>
+                        <h1 class="hero-title">Kreatif Tasarımcı</h1>
+                        <p class="hero-description">Dijital dünyada iz bırakan projeler oluşturan bir Full Stack Developer ve Kreatif Tasarımcıyım. Modern teknolojiler ve yaratıcı çözümlerle markaların dijital varlıklarını güçlendiriyorum.</p>
+                        <div class="hero-stats">
+                            <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                                <span class="stat-number">100+</span>
+                                <span class="stat-label">Başarılı Proje</span>
+                            </div>
+                            <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                                <span class="stat-number">50+</span>
+                                <span class="stat-label">Mutlu Müşteri</span>
+                            </div>
+                            <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                                <span class="stat-number">7+</span>
+                                <span class="stat-label">Yıl Deneyim</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-image-container" data-aos="fade-left">
+                        <div class="hero-image-wrapper">
+                            <img src="assets/img/logo.png" alt="Kreatif Tasarımcı Logo" class="hero-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="skills">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <h2 class="section-title">Uzmanlık Alanlarım</h2>
+                    <p class="section-subtitle">Sürekli kendimi geliştirerek en güncel teknolojileri takip ediyorum</p>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="skill-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3>Yazılım Geliştirme</h3>
+                        <div class="skill-progress">
+                            <div class="progress-item">
+                                <span class="label">Frontend (React, Vue.js)</span>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <div class="progress-item">
+                                <span class="label">Backend (Node.js, PHP)</span>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div class="progress-item">
+                                <span class="label">Mobile (React Native)</span>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="skill-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h3>Grafik & UI/UX Tasarım</h3>
+                        <div class="skill-progress">
+                            <div class="progress-item">
+                                <span class="label">Adobe Photoshop</span>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <div class="progress-item">
+                                <span class="label">Adobe Illustrator</span>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div class="progress-item">
+                                <span class="label">Figma & UI Design</span>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 95%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="skill-icon">
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        <h3>Dijital Pazarlama & SEO</h3>
+                        <div class="skill-progress">
+                            <div class="progress-item">
+                                <span class="label">SEO Optimizasyonu</span>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div class="progress-item">
+                                <span class="label">Sosyal Medya</span>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="progress-item">
+                                <span class="label">Google Analytics</span>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 90%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Timeline -->
+        <section class="experience">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <h2 class="section-title">Deneyimlerim</h2>
+                    <p class="section-subtitle">Profesyonel iş deneyimlerim ve başarılarım</p>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item" data-aos="fade-right">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-header">
+                                <span class="date">2023 - Günümüz</span>
+                                <h3 class="title">Senior Frontend Developer</h3>
+                                <span class="company">Freelancer</span>
+                            </div>
+                            <p class="description">Uluslararası müşteriler için modern web uygulamaları geliştiriyor, UI/UX danışmanlığı yapıyorum. React ve Next.js kullanarak performans odaklı projeler üretiyorum.</p>
+                            <div class="tags">
+                                <span class="tag">React</span>
+                                <span class="tag">Next.js</span>
+                                <span class="tag">TypeScript</span>
+                                <span class="tag">UI/UX</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item" data-aos="fade-left">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-header">
+                                <span class="date">2021 - 2023</span>
+                                <h3 class="title">Frontend Team Lead</h3>
+                                <span class="company">Tech Solutions Inc.</span>
+                            </div>
+                            <p class="description">5 kişilik frontend ekibine liderlik yaparak kurumsal projelerin başarıyla tamamlanmasını sağladım. Çevik metodolojiler kullanarak proje süreçlerini yönettim.</p>
+                            <div class="tags">
+                                <span class="tag">Team Lead</span>
+                                <span class="tag">Agile</span>
+                                <span class="tag">React</span>
+                                <span class="tag">Vue.js</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item" data-aos="fade-right">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-header">
+                                <span class="date">2019 - 2021</span>
+                                <h3 class="title">UI/UX Designer</h3>
+                                <span class="company">Creative Agency</span>
+                            </div>
+                            <p class="description">Kullanıcı deneyimi odaklı web siteleri ve mobil uygulamalar tasarladım. A/B testleri yaparak dönüşüm oranlarını %40 artırdım.</p>
+                            <div class="tags">
+                                <span class="tag">UI Design</span>
+                                <span class="tag">UX Research</span>
+                                <span class="tag">Figma</span>
+                                <span class="tag">Adobe XD</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html">
+                    <img src="assets/img/logo.png" alt="Kreatif Tasarımcı Logo">
+                </a>
+                    <p>Kreatif Tasarımcı</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-nav">
+                        <h4>Menü</h4>
+                        <a href="index.html">Ana Sayfa</a>
+                        <a href="about.html">Hakkımda</a>
+                        <a href="projects.html">Projeler</a>
+                        <a href="contact.html">İletişim</a>
+                    </div>
+                    <div class="footer-social">
+                        <h4>Sosyal Medya</h4>
+                        <a href="#" target="_blank">Instagram</a>
+                        <a href="#" target="_blank">Twitter</a>
+                        <a href="#" target="_blank">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Kreatif Tasarımcı. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/components/header.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100,
+            easing: 'ease-in-out'
+        });
+    </script>
+</body>
+</html> 
